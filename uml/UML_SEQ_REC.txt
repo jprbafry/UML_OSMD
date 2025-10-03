@@ -1,0 +1,75 @@
+@startuml
+
+hide footbox
+
+skinparam sequence {
+	BoxBorderColor #000000
+	BoxFontStyle Bold
+	BoxFontSize 16
+	ParticipantBorderColor #000000
+	ParticipantFontStyle Bold
+	ActorBorderColor #000000
+	ActorFontStyle Bold
+	ArrowColor #000000
+	LifeLineBorderColor #000000
+}
+
+box "MOD" #FFFFFF
+	participant PCS_EXT_MOD #FFFFFF
+end box
+
+box "REC" #ADD8E6
+	participant CIP_SOC_REC #FFD700
+	participant PCS_FEP_REC #0066FF
+	participant CIP_MEM_MDR #FFD700
+	participant CIP_MEM_MDR #FFD700
+end box
+
+activate PCS_EXT_MOD #FFFFFF
+group REC data reception: equipment status and communication alerts
+	loop
+		PCS_FEP_REC -> CIP_MEM_MDR: 
+		activate PCS_FEP_REC #0066FF
+		activate CIP_MEM_MDR #FFD700
+		CIP_MEM_MDR --> PCS_FEP_REC: [FDI_MGR_REC]
+		deactivate CIP_MEM_MDR 
+		PCS_FEP_REC -> PCS_FEP_REC: 
+		note right #FFFFFF
+			**Encoding**
+			MODBUS TCP frames
+		end note
+		PCS_FEP_REC -> CIP_SOC_REC: [FDE_REC_MOD]
+		deactivate PCS_FEP_REC
+		activate CIP_SOC_REC #FFD700
+		CIP_SOC_REC -> PCS_EXT_MOD: MODBUS TCP frames
+		note right #FFFFFF
+			**Sending**
+			MODBUS TCP frames
+		end note
+		deactivate CIP_SOC_REC
+		activate PCS_EXT_MOD #FFFFFF
+		PCS_EXT_MOD -> CIP_SOC_REC: MODBUS TCP frames
+		note right #FFFFFF
+			**Reception**
+			MODBUS TCP frames
+		end note
+		deactivate PCS_EXT_MOD 
+		activate CIP_SOC_REC #FFD700
+		CIP_SOC_REC -> PCS_FEP_REC: [FDE_MOD_REC]
+		deactivate CIP_SOC_REC
+		activate PCS_FEP_REC #0066FF
+		PCS_FEP_REC -> PCS_FEP_REC: 
+		note right #FFFFFF
+			**Decoding**
+			MODBUS TCP frames
+		end note
+		PCS_FEP_REC -> CIP_MEM_MDR: [FDI_REC_MGR]
+		activate CIP_MEM_MDR #FFD700
+		CIP_MEM_MDR --> PCS_FEP_REC: \t
+		deactivate CIP_MEM_MDR 
+		deactivate PCS_FEP_REC
+	end
+end
+deactivate PCS_EXT_MOD #FFFFFF
+
+@enduml
