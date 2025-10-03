@@ -1,0 +1,54 @@
+	RPM: Hardware Failure Redundancy
+	
+	
+	@startuml
+	
+		skinparam state {
+	  		BorderColor Black
+	  		BackgroundColor #lightgrey
+	  		ArrowColor Black
+	  		ArrowFontColor Black
+		}
+		
+  		note "**T**: maximum waiting time to \nexit the 'Hypothesis' state\n\n**N**: maximum number of consecutive \nrestarts of a service" as N1 #FFFFFF
+		
+		
+		[*] -[#black]-> S3C		
+		
+		state "Monitored" as S3C{ 
+			
+			state Inactive
+			
+			[*] -[#black]-> Active
+			
+			
+			state Active {
+			
+				state Undefined
+				state Normal
+				state Standby
+				state Error
+				state Hypothesis
+			
+				[*] -[#black]-> Undefined
+				Undefined -[#black]-> Normal: (1) \n Local server \n unreachable 
+				Undefined -[#black]-> Standby: (2) \n Local server \n reachable
+				Standby -[#black]-> Normal: (3) \n Local server \n unreachable \n
+				Normal -[#black]-> Hypothesis: (4) \n Remote server \n unreachable
+				Normal -[#black]-> Error: (5) \n Synchronization \n issue \n Irig-B
+				Normal -[#black]-> [*]: (10) \n Virtual IP \n address issue
+				Normal -[#black]-> [*]: (11) \n Service unavailability \n provided \n **N** times
+				Hypothesis -[#black]-> Normal: (6) \n Network \n reachable \n within **T**
+				Hypothesis -[#black]-> [*]: (7) \n Network \n unreachable \n within **T**
+				Error -[#black]-> Normal: (8) \n No attempt \n in progress
+				Error -[#black]-> [*]: (9) \n At least one attempt \n in progress
+			}
+			Active -down[#black]-> Inactive: (A) \n L3C stopped
+			Inactive -up[#black]-> Active: (B) \n After a delay **D** \n With **M** not reached
+			Inactive -down[#black]-> [*]: (C) \n After a delay **D** \n With **M** reached
+		}
+		S3C-[#black]-> [*]
+		
+  		note "**D**: maximum waiting time to \nrestart the L3C\n\n**M**: maximum number of consecutive \nrestarts of the L3C" as N2 #FFFFFF
+		
+	@enduml

@@ -1,0 +1,50 @@
+@startuml
+
+	skinparam component {
+  		BorderColor Black
+  		ArrowColor Black
+  		ArrowFontColor Black
+	}
+
+	[**DGA Clock**] #FFFFFF
+
+	frame "Local Ethernet Network" #F9F9F9{
+		[**Trigger Module**] #FFFFFF
+		[**Trichromy System**] #FFFFFF
+		frame "High Availability Cluster" #F9F9F9{
+			frame "Application Server (Local)" #E5E5E5{
+				frame "L3C (Normal Mode)" #D2D2D2{
+					[**EME**] #A7FF89
+					[**SYN**] #A7FF89
+					[**REC**] #ADD8E6
+					[**RVJ**] #ADD8E6
+			  		[**HMI**] #ADD8E6
+			    	[**MGR**] #ADD8E6
+				}
+				[**Web Server**] #FFFFFF
+				[**Database**] #FFFFFF
+			}
+		}
+	}
+
+	[**Trigger Module**] --> [**REC**] : FDE_MOD_REC
+	[**Trigger Module**] --> [**EME**] : FDE_MOD_EME
+	[**DGA Clock**] --> [**SYN**] : FDE_HLG_SYN
+	[**Trichromy System**] -right-> [**RVJ**] : FDE_TRI_RVJ
+	[**Web Server**] --> [**HMI**] : FDE_WEB_IHM
+	[**Database**] --> [**MGR**] : FDE_BDD_MGR
+	
+	
+	[**EME**] --> [**Trigger Module**] : FDE_EME_MOD
+	[**MGR**] --> [**Database**] : FDE_MGR_BDD
+	[**REC**] --> [**Trigger Module**] : FDE_REC_MOD
+	
+	[**RVJ**] --> [**MGR**] : FDI_RVJ_MGR
+	[**REC**] --> [**MGR**] : FDI_REC_MGR
+	[**MGR**] --> [**REC**] : FDI_MGR_REC
+	[**HMI**] --> [**MGR**] : FDI_IHM_MGR
+	[**MGR**] --> [**EME**] : FDI_MGR_EME
+	[**EME**] --> [**MGR**] : FDI_EME_MGR
+	[**SYN**] --> [**EME**] : FDI_SYN_EME
+	
+@enduml

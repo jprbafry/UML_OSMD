@@ -1,0 +1,69 @@
+@startuml
+
+	skinparam component {
+  		BorderColor Black
+  		ArrowColor Black
+  		ArrowFontColor Black
+	}
+
+	frame "Synchronization Network" as SyncNetwork {
+		interface " " as EVN_Synchronisation #000000
+		note right of EVN_Synchronisation #FFFFFF
+			**TDS** 
+		end note
+	}
+	
+	actor "**User**" as User #FFFFFF
+	
+	frame "Local Ethernet Network" #FFFFFF{
+		frame "Client PC" #FFFFFF{
+			component "**Web Browser**\n**(Kiosk Mode)**" as NAV_Client #FFFFFF
+		}
+		frame "High Availability Cluster" #F9F9F9{
+			interface "**Virtual IP Address**" as IP #FFFFFF
+			frame "Application Server (Local)" #E5E5E5{
+				component "**Server**\n**NTP**" as NTP_Local #FFFFFF
+			    component "**L3C**\n**(Normal Mode)**" as L3C_Local #D2D2D2
+				component "**Server**\n**Web**" as WEB_Local #FFFFFF
+				component "**File**\n**System**" as FIC_Local #FFFFFF
+				database "**Database**" as BDD_Local #FFFFFF
+				interface " " as ENV_Local #000000
+			}
+			frame "Application Server (Remote)" #E5E5E5{
+				component "**File**\n**System**" as FIC_Remote #FFFFFF
+				component "**Server**\n**Web**" as WEB_Remote #FFFFFF
+				component "**L3C**\n**(Standby Mode)**" as L3C_Remote #D2D2D2
+				database "**Database**" as BDD_Remote #FFFFFF
+				component "**Server**\n**NTP**" as NTP_Remote #FFFFFF
+				interface " " as ENV_Remote #000000
+			}
+		}
+		
+		interface " " as ENV_Network #000000
+		note right of ENV_Network #FFFFFF
+			**Trichromy System** 
+			**Trigger Modules** 
+		end note
+	}
+	
+	User -down-> NAV_Client 
+	NAV_Client --> IP 
+	IP -down-> WEB_Local 
+	IP .down. WEB_Remote
+	
+	WEB_Local -down- L3C_Local 
+	L3C_Local <--> BDD_Local
+	WEB_Local -down-> BDD_Local
+	L3C_Local <-left-> FIC_Local 
+	
+	WEB_Remote .down. L3C_Remote 
+	L3C_Remote .. BDD_Remote
+	WEB_Remote .down. BDD_Remote	
+	L3C_Remote <-right-> FIC_Remote 
+	
+	L3C_Local -- L3C_Remote 
+	BDD_Local--> BDD_Remote
+	L3C_Local -right- ENV_Local
+	L3C_Remote .left. ENV_Remote
+	
+@enduml

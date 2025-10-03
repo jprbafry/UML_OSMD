@@ -1,0 +1,42 @@
+@startuml
+
+	skinparam activity {
+  		BorderColor Black
+  		ArrowColor Black
+  		ArrowFontColor Black
+  		BackgroundColor #D3D3D3
+	}
+  	skinparam shadowing false
+	
+	start
+		:Read CIP_MEM_MFL;
+	if (\nMFL?\n) then (Normal)
+		partition "**Management of information coming from MOD**" {
+			:Read BDD_VUE_IEM\nRead CIP_MEM_MDR;
+			if (\nConsistency of MDR IP addresses\nCIP_MEM_MDR vs BDD_VUE_IEM?\n) then (Yes)
+				note left
+					For each MDR
+				end note
+			
+				fork
+					:Compute new Alert Code;
+					:Write BDD_TAB_MDR;	
+				fork again
+					:Compute new information state;
+					:Write BDD_TAB_INF;		
+				end fork
+			
+				:Write BDD_TAB_EVN;
+			else (No)
+				:Update
+				 CIP_MEM_MDR
+				 from
+				 BDD_TAB_MDR;
+			endif
+		}
+	else (Standby)
+	endif
+		:Put in standby;
+	stop
+	
+@enduml
