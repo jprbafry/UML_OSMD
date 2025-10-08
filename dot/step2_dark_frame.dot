@@ -1,0 +1,13 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__Steps__step2_dark_frame [label="scattering_app.Steps.step2_dark_frame", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step2_dark_frame__capture_dark_frame [label="capture_dark_frame", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step2_dark_frame__create [label="create", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step2_dark_frame__set_nominal_dark_value [label="set_nominal_dark_value", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__Steps__step2_dark_frame__create -> scattering_app__Steps__step2_dark_frame__set_nominal_dark_value [style="solid", color="#000000"];
+        scattering_app__Steps__step2_dark_frame__create -> scattering_app__Steps__step2_dark_frame__capture_dark_frame [style="solid", color="#000000"];
+    }

@@ -1,0 +1,21 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__Steps__step5_start_measurement [label="scattering_app.Steps.step5_start_measurement", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__create [label="create", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__save_bsdf [label="save_bsdf", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__save_config [label="save_config", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__start_measurement [label="start_measurement", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__stop_measurement [label="stop_measurement", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__to_config_dict [label="to_config_dict", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step5_start_measurement__start_measurement__run_measurement_thread [label="run_measurement_thread", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__Steps__step5_start_measurement__save_config -> scattering_app__Steps__step5_start_measurement__to_config_dict [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__save_config [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__save_bsdf [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__start_measurement [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__stop_measurement [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__start_measurement -> scattering_app__Steps__step5_start_measurement__start_measurement__run_measurement_thread [style="solid", color="#000000"];
+    }

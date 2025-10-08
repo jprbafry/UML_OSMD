@@ -1,0 +1,21 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        StubSerial [label="StubSerial", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__ArduinoRepresentation [label="ArduinoRepresentation", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__Serial [label="Serial", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__ArduinoRepresentation____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__ArduinoRepresentation__readline [label="readline", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__ArduinoRepresentation__sendCommand [label="sendCommand", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__Serial____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__Serial__readline [label="readline", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubSerial__Serial__write [label="write", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        StubSerial__ArduinoRepresentation__sendCommand -> StubSerial__ArduinoRepresentation____init__ [style="solid", color="#000000"];
+        StubSerial__Serial____init__ -> StubSerial__ArduinoRepresentation____init__ [style="solid", color="#000000"];
+        StubSerial__Serial____init__ -> StubSerial__ArduinoRepresentation [style="solid", color="#000000"];
+        StubSerial__Serial__write -> StubSerial__ArduinoRepresentation__sendCommand [style="solid", color="#000000"];
+        StubSerial__Serial__readline -> StubSerial__ArduinoRepresentation__readline [style="solid", color="#000000"];
+    }

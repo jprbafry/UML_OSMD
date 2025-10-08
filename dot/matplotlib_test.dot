@@ -1,0 +1,12 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        matplotlib_test [label="matplotlib_test", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        matplotlib_test__animate [label="animate", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        matplotlib_test__generate_data [label="generate_data", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        matplotlib_test -> matplotlib_test__generate_data [style="solid", color="#000000"];
+        matplotlib_test -> matplotlib_test__animate [style="solid", color="#000000"];
+    }

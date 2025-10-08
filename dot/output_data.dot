@@ -1,0 +1,14 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__output_data [label="scattering_app.output_data", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__output_data__generate_zemax_bsdf_file [label="generate_zemax_bsdf_file", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__output_data__save_relative_errors [label="save_relative_errors", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__output_data__generate_zemax_bsdf_file__write_data_block [label="write_data_block", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__output_data__generate_zemax_bsdf_file__write_header [label="write_header", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__output_data__generate_zemax_bsdf_file -> scattering_app__output_data__generate_zemax_bsdf_file__write_header [style="solid", color="#000000"];
+        scattering_app__output_data__generate_zemax_bsdf_file -> scattering_app__output_data__generate_zemax_bsdf_file__write_data_block [style="solid", color="#000000"];
+    }

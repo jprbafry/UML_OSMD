@@ -1,0 +1,21 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        StubPiCamera2 [label="StubPiCamera2", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubImageArray [label="StubImageArray", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2 [label="StubPiCamera2", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubImageArray____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubImageArray__view [label="view", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__capture_array [label="capture_array", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__capture_metadata [label="capture_metadata", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__configure [label="configure", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__create_still_configuration [label="create_still_configuration", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__set_controls [label="set_controls", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        StubPiCamera2__StubPiCamera2__start [label="start", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        StubPiCamera2__StubPiCamera2__capture_array -> StubPiCamera2__StubImageArray____init__ [style="solid", color="#000000"];
+        StubPiCamera2__StubPiCamera2__capture_array -> StubPiCamera2__StubImageArray [style="solid", color="#000000"];
+    }

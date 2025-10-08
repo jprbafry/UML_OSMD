@@ -1,0 +1,10 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        pygame_plotter [label="pygame_plotter", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        pygame_plotter__generate_data [label="generate_data", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        pygame_plotter -> pygame_plotter__generate_data [style="solid", color="#000000"];
+    }

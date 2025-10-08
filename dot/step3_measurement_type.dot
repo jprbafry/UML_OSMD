@@ -1,0 +1,9 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__Steps__step3_measurement_type [label="scattering_app.Steps.step3_measurement_type", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step3_measurement_type__create [label="create", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+    }

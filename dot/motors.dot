@@ -1,0 +1,21 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__motors [label="scattering_app.motors", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors [label="Motors", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_detector_azimuthal [label="move_detector_azimuthal", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_detector_radial [label="move_detector_radial", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_detector_to_offset [label="move_detector_to_offset", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_light_azimuthal [label="move_light_azimuthal", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_light_radial [label="move_light_radial", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__move_light_to_offset [label="move_light_to_offset", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__motors__Motors__reset_position [label="reset_position", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__motors__Motors__move_light_to_offset -> scattering_app__motors__Motors__move_light_azimuthal [style="solid", color="#000000"];
+        scattering_app__motors__Motors__move_light_to_offset -> scattering_app__motors__Motors__move_light_radial [style="solid", color="#000000"];
+        scattering_app__motors__Motors__move_detector_to_offset -> scattering_app__motors__Motors__move_detector_azimuthal [style="solid", color="#000000"];
+        scattering_app__motors__Motors__move_detector_to_offset -> scattering_app__motors__Motors__move_detector_radial [style="solid", color="#000000"];
+    }

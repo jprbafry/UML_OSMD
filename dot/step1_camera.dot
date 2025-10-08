@@ -1,0 +1,11 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__Steps__step1_camera [label="scattering_app.Steps.step1_camera", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step1_camera__create [label="create", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__Steps__step1_camera__start_camera [label="start_camera", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__Steps__step1_camera__create -> scattering_app__Steps__step1_camera__start_camera [style="solid", color="#000000"];
+    }

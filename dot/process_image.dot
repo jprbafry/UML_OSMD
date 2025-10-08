@@ -1,0 +1,15 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__process_image [label="scattering_app.process_image", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__process_image__circular_roi_mean [label="circular_roi_mean", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__process_image__detect_static_noise [label="detect_static_noise", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__process_image__entropy_noise_check [label="entropy_noise_check", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__process_image__extract_color_channels [label="extract_color_channels", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__process_image__local_variance_noise_check [label="local_variance_noise_check", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__process_image__detect_static_noise -> scattering_app__process_image__local_variance_noise_check [style="solid", color="#000000"];
+        scattering_app__process_image__detect_static_noise -> scattering_app__process_image__entropy_noise_check [style="solid", color="#000000"];
+    }

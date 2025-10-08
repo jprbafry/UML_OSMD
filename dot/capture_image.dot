@@ -1,0 +1,39 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__capture_image [label="scattering_app.capture_image", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__capture_raw_image [label="capture_raw_image", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__check_and_adjust_exposure [label="check_and_adjust_exposure", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__check_stop [label="check_stop", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__get_camera_metadata [label="get_camera_metadata", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run [label="measure_run", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__run_full_measurement [label="run_full_measurement", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__adjust_exposure [label="adjust_exposure", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__capture_data [label="capture_data", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__dump_image_jpg [label="dump_image_jpg", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__generate_bsdf_data [label="generate_bsdf_data", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__start_measure [label="start_measure", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__sweep_detector [label="sweep_detector", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__capture_image__measure_run__sweep_lightsource [label="sweep_lightsource", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__capture_image__check_and_adjust_exposure -> scattering_app__capture_image__get_camera_metadata [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__start_measure -> scattering_app__capture_image__measure_run__sweep_lightsource [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__sweep_lightsource -> scattering_app__capture_image__measure_run__sweep_detector [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__sweep_lightsource -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__sweep_detector -> scattering_app__capture_image__measure_run__capture_data [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__sweep_detector -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__check_and_adjust_exposure [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__capture_raw_image [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__capture_raw_image [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__measure_run__adjust_exposure [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__measure_run__dump_image_jpg [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__measure_run__generate_bsdf_data [style="solid", color="#000000"];
+        scattering_app__capture_image__run_full_measurement -> scattering_app__capture_image__measure_run__start_measure [style="solid", color="#000000"];
+        scattering_app__capture_image__run_full_measurement -> scattering_app__capture_image__measure_run [style="solid", color="#000000"];
+        scattering_app__capture_image__run_full_measurement -> scattering_app__capture_image__measure_run____init__ [style="solid", color="#000000"];
+    }
