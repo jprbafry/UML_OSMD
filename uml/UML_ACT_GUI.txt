@@ -1,0 +1,43 @@
+@startuml
+title Start Measurement (Step 5)
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 150
+skinparam DefaultFontSize 12
+skinparam ActivityFontSize 12
+skinparam ArrowThickness 1
+skinparam ActivityBorderThickness 1
+skinparam TitleFontSize 14
+skinparam RoundCorner 15
+
+start
+:Open measurement control;
+:Wait until user press starts;
+
+
+partition "Management of full measurement" {
+  repeat :Begin measurement process;
+    :Perform sweeping routine;
+    :Capture & process the image;
+    if (Captured valid images?) then (Yes)
+      :Combine valid images;
+      :Compute centered circular ROI for each color channel;
+    else (No)
+      :Check & adjust exposure if needed;
+      note right
+        For each angle
+      end note
+      :Discard noisy or invalid images;
+    endif
+  repeat while (More angles?) is (yes)
+  ->no;
+  :Stop measurement;
+}
+
+:Save BSDF;
+:Export BSDF file;
+:Export CSV (relative errors);
+
+:Stop the process;
+stop
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+title OSMD GUI
+start
+
+:step0_welcome.py;
+--> "Next Button";
+:step1_camera.py;
+
+--> "Start Camera Button";
+:start_camera() / camera.initialize_camera();
+
+:step2_dark_frame.py;
+
+--> "Capture Dark Frame Button";
+:capture_dark_frame() / capture_image.capture_raw_image();
+
+--> "Use Value Button";
+:set_nominal_dark_value();
+
+:step3_measurement_type.py;
+--> "Next Button";
+:step4_angle_steps.py;
+
+:update_step_label();
+--> "Next Button";
+:save_step_settings() / generate_angle_lists();
+
+:step5_start_measurement.py;
+
+--> "Start Button";
+:start_measurement();
+:capture_image.run_full_measurement();
+
+:capture_raw_image();
+:process_image.extract_color_channels();
+:check_and_adjust_exposure();
+:process_image.detect_static_noise();
+:process_image_circular_roi_mean();
+
+--> "Stop Button";
+:stop_measurement();
+
+--> "Save BSDF Button";
+:save_bsdf();
+:output_data.generate_zemax_bsdf_file();
+:output_data.save_relative_errors();
+
+stop
+@enduml

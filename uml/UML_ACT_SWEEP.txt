@@ -1,0 +1,23 @@
+@startuml
+
+start
+partition "Perform sweeping routine" {
+    partition "Light Source Sweep" {
+    
+    repeat;
+    repeat;
+    start
+    partition "Detector Sweep" {
+        repeat;
+        repeat;
+        :Move Detector Motors;
+        repeat while (Finished Radial?) is (No) not (Yes)
+        repeat while (Finished Azimuthal?) is (No) not (Yes)
+    }
+    :Move Light Source Motors;
+    repeat while (Finished Azimuthal?) is (No) not (Yes)
+    repeat while (Finished Radial?) is (No) not (Yes)
+    }
+}
+stop
+@enduml

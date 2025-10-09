@@ -1,0 +1,28 @@
+@startuml
+title Steps 0–4 of GUI
+
+start
+
+:Display welcome and navigation screen;
+:User clicks "Next";
+:Camera starts; 
+:Camera configuration & controls; 
+:User clicks "Capture Dark Frame"; 
+:Captures RAW image;
+:User clicks "Use Value";
+:Store value entered by user; 
+
+   if (Select measurement type) then (Yes)
+      :Angle increments for light source & detector; 
+      :Shows the number of steps in that direction;
+    else (No)
+       :Stop the process;
+   endif
+
+:User clicks "Next";
+:Save step settings; 
+:Generate angle list; 
+
+:Step 5; 
+stop
+@enduml

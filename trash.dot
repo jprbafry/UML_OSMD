@@ -1,0 +1,25 @@
+digraph G {
+    graph [rankdir=TB];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        scattering_app__scattering_app [label="scattering_app.scattering_app", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp [label="ScatteringApp", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp____init__ [label="__init__", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__create_status_bar [label="create_status_bar", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__create_steps [label="create_steps", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__next_step [label="next_step", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__set_status [label="set_status", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__set_style [label="set_style", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        scattering_app__scattering_app__ScatteringApp__show_step [label="show_step", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+    }
+        scattering_app__scattering_app -> scattering_app__scattering_app__ScatteringApp____init__ [style="solid", color="#000000"];
+        scattering_app__scattering_app -> scattering_app__scattering_app__ScatteringApp [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__set_style [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__create_status_bar [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__show_step [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp____init__ [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__create_steps [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp__create_status_bar -> scattering_app__scattering_app__ScatteringApp__set_status [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp__next_step -> scattering_app__scattering_app__ScatteringApp__show_step [style="solid", color="#000000"];
+    }

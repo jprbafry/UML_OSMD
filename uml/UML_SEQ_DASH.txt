@@ -1,0 +1,29 @@
+@startuml
+
+
+actor User
+participant "User Interface (UI)" as UI
+participant "Monitoring Controller" as Controller
+participant "Sensors" as Sensors
+database "Data Storage" as Storage
+
+User -> UI: Start measurement session
+UI -> Controller: Initialize monitoring
+Controller -> Sensors: Requesting sensor data
+Sensors ----> Controller: Sending raw data (continuously)
+
+	loop Real time dashboard
+		Controller -> UI: Collected data
+		Controller -> UI: System issues (if any)	
+	end
+
+    loop Data logging 
+        Controller -> Storage: Store sensor data 
+    end
+
+User -> UI: Stop measurement session
+UI -> Controller: Stop monitoring
+Controller -> Sensors: Release sensors 
+
+
+@enduml
