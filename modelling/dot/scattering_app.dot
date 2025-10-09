@@ -16,10 +16,10 @@ digraph G {
         scattering_app__scattering_app -> scattering_app__scattering_app__ScatteringApp____init__ [style="solid", color="#000000"];
         scattering_app__scattering_app -> scattering_app__scattering_app__ScatteringApp [style="solid", color="#000000"];
         scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__set_style [style="solid", color="#000000"];
-        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__create_status_bar [style="solid", color="#000000"];
-        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__show_step [style="solid", color="#000000"];
         scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp____init__ [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__create_status_bar [style="solid", color="#000000"];
         scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__create_steps [style="solid", color="#000000"];
+        scattering_app__scattering_app__ScatteringApp____init__ -> scattering_app__scattering_app__ScatteringApp__show_step [style="solid", color="#000000"];
         scattering_app__scattering_app__ScatteringApp__create_status_bar -> scattering_app__scattering_app__ScatteringApp__set_status [style="solid", color="#000000"];
         scattering_app__scattering_app__ScatteringApp__next_step -> scattering_app__scattering_app__ScatteringApp__show_step [style="solid", color="#000000"];
     }

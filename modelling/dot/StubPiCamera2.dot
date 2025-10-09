@@ -16,6 +16,6 @@ digraph G {
         StubPiCamera2__StubPiCamera2__set_controls [label="set_controls", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
         StubPiCamera2__StubPiCamera2__start [label="start", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
     }
-        StubPiCamera2__StubPiCamera2__capture_array -> StubPiCamera2__StubImageArray____init__ [style="solid", color="#000000"];
         StubPiCamera2__StubPiCamera2__capture_array -> StubPiCamera2__StubImageArray [style="solid", color="#000000"];
+        StubPiCamera2__StubPiCamera2__capture_array -> StubPiCamera2__StubImageArray____init__ [style="solid", color="#000000"];
     }

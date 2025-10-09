@@ -26,8 +26,8 @@ digraph G {
         scattering_app__capture_image__measure_run__sweep_detector -> scattering_app__capture_image__measure_run__capture_data [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__sweep_detector -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__check_and_adjust_exposure [style="solid", color="#000000"];
-        scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__capture_raw_image [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];
+        scattering_app__capture_image__measure_run__adjust_exposure -> scattering_app__capture_image__capture_raw_image [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__capture_raw_image [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__measure_run__adjust_exposure [style="solid", color="#000000"];
         scattering_app__capture_image__measure_run__capture_data -> scattering_app__capture_image__check_stop [style="solid", color="#000000"];

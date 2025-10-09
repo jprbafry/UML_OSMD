@@ -10,8 +10,8 @@ digraph G {
         scattering_app__Steps__step4_angle_steps__update_step_label [label="update_step_label", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
         scattering_app__Steps__step4_angle_steps__generate_angle_lists__generate_steps [label="generate_steps", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
     }
-        scattering_app__Steps__step4_angle_steps__create -> scattering_app__Steps__step4_angle_steps__save_step_settings [style="solid", color="#000000"];
         scattering_app__Steps__step4_angle_steps__create -> scattering_app__Steps__step4_angle_steps__update_step_label [style="solid", color="#000000"];
+        scattering_app__Steps__step4_angle_steps__create -> scattering_app__Steps__step4_angle_steps__save_step_settings [style="solid", color="#000000"];
         scattering_app__Steps__step4_angle_steps__save_step_settings -> scattering_app__Steps__step4_angle_steps__generate_angle_lists [style="solid", color="#000000"];
         scattering_app__Steps__step4_angle_steps__generate_angle_lists -> scattering_app__Steps__step4_angle_steps__generate_angle_lists__generate_steps [style="solid", color="#000000"];
     }

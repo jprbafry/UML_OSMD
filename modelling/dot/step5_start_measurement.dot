@@ -14,8 +14,8 @@ digraph G {
     }
         scattering_app__Steps__step5_start_measurement__save_config -> scattering_app__Steps__step5_start_measurement__to_config_dict [style="solid", color="#000000"];
         scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__save_config [style="solid", color="#000000"];
-        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__save_bsdf [style="solid", color="#000000"];
         scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__start_measurement [style="solid", color="#000000"];
+        scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__save_bsdf [style="solid", color="#000000"];
         scattering_app__Steps__step5_start_measurement__create -> scattering_app__Steps__step5_start_measurement__stop_measurement [style="solid", color="#000000"];
         scattering_app__Steps__step5_start_measurement__start_measurement -> scattering_app__Steps__step5_start_measurement__start_measurement__run_measurement_thread [style="solid", color="#000000"];
     }

@@ -3,7 +3,7 @@ import subprocess
 
 # Absolute paths
 PYTHON_SRC = os.path.expanduser("~/OSMD")
-OUTPUT_DIR = os.path.expanduser("~/UML_OSMD")
+OUTPUT_DIR = os.path.expanduser("~/OSMD_Trainees/modelling")
 
 # Create output directory if it doesn't exist
 os.makedirs(OUTPUT_DIR, exist_ok=True)

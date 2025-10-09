@@ -10,6 +10,6 @@ digraph G {
         scattering_app__process_image__extract_color_channels [label="extract_color_channels", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
         scattering_app__process_image__local_variance_noise_check [label="local_variance_noise_check", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
     }
-        scattering_app__process_image__detect_static_noise -> scattering_app__process_image__local_variance_noise_check [style="solid", color="#000000"];
         scattering_app__process_image__detect_static_noise -> scattering_app__process_image__entropy_noise_check [style="solid", color="#000000"];
+        scattering_app__process_image__detect_static_noise -> scattering_app__process_image__local_variance_noise_check [style="solid", color="#000000"];
     }
