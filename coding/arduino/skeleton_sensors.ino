@@ -2,6 +2,15 @@
 #include <Thread.h>
 #include <ThreadController.h>
 
+/* 
+
+This code creates three cooperative (as oppposed to preemptive) threads
+    - tempThread: produces temperature data
+    - accelThread: produces accelerometer data
+    - printThread: prints data on serial port
+*/
+
+
 // --------------------------------------
 // Data structure
 // --------------------------------------
