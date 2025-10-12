@@ -1,6 +1,7 @@
 import threading
 import os
 import time
+import logging
 
 try:
     import serial
@@ -8,8 +9,16 @@ except ImportError:
     serial = None
 
 
+# Logging Setup
+logger = logging.getLogger("SerialManager")
+logger.setLevel(logging.DEBUG) # log everything
+ch = logging.StreamHandler() # print to console
+logger.addHandler(ch) # attach handler
+
+
+# Simulated serial port using text files for inter-process comms
 class FileBackedFakeSerial:
-    """Simulated serial port using text files for inter-process comms."""
+
     def __init__(self, name):
         self.name = name.upper()
         base = os.path.dirname(__file__)
@@ -22,6 +31,7 @@ class FileBackedFakeSerial:
         else:
             raise ValueError("Name must be 'A' or 'B'")
 
+        # ensure files exist
         for f in [self.write_file, self.read_file]:
             open(f, 'a').close()
 
@@ -42,43 +52,50 @@ class FileBackedFakeSerial:
 
     def flush(self):
         pass
+
     def close(self):
         pass
 
-
+# Class to handle Tx/Rx data over real or simulated serial
 class SerialManager:
-    """Handles sending and receiving data over real or simulated serial."""
-    def __init__(self, port="COM5", baud=9600, simulate=True, name=None):
+
+    def __init__(self, port="COM5", baud=9600, simulate=True, name=None, debug=False):
         self.running = threading.Event()
         self.send_queue = []
         self.lock = threading.Lock()
         self.on_receive = None
         self.simulate = simulate
 
+        if debug:
+            logger.setLevel(logging.DEBUG)
+        else:
+            logger.setLevel(logging.INFO)
+
         if simulate or serial is None:
             if not name:
                 raise ValueError("Need name='A' or 'B' when simulate=True")
-            print(f"[INFO] Using simulated serial as {name}")
+            logger.info(f"Using simulated serial as {name}")
             self.ser = FileBackedFakeSerial(name)
         else:
             try:
-                print(f"[INFO] Opening real serial port {port} @ {baud}")
+                logger.info(f"Opening real serial port {port} @ {baud}")
                 self.ser = serial.Serial(
                     port=port,
                     baudrate=baud,
-                    timeout=0.1, # don't block forever
-                    write_timeout=0.1 # don't block forever
+                    timeout=0.1,  # don't block forever
+                    write_timeout=0.1
                 )
-                print("[INFO] Serial port opened successfully.")
+                logger.info("Serial port opened successfully.")
             except Exception as e:
-                print(f"[ERROR] Could not open {port}: {e}")
-                print("[WARN] Falling back to simulation mode.")
+                logger.error(f"Could not open {port}: {e}")
+                logger.warning("Falling back to simulation mode.")
                 self.ser = FileBackedFakeSerial(name or 'A')
                 self.simulate = True
 
         self.tx_thread = threading.Thread(target=self.tx_loop, daemon=True)
         self.rx_thread = threading.Thread(target=self.rx_loop, daemon=True)
 
+    # Transmission Thread (function)
     def tx_loop(self):
         while self.running.is_set():
             with self.lock:
@@ -86,12 +103,13 @@ class SerialManager:
                     msg = self.send_queue.pop(0)
                     try:
                         self.ser.write((msg + "\n").encode('ascii'))
-                        print(f"[TX] {msg}")
+                        logger.debug(f"TX: {msg}")
                     except Exception as e:
-                        print(f"[TX-ERROR] {e}")
+                        logger.error(f"TX error: {e}")
             time.sleep(0.05)
-        print("[THREAD] TX stopped")
+        logger.debug("TX thread stopped")
 
+    # Reception Thread (function)
     def rx_loop(self):
         while self.running.is_set():
             try:
@@ -99,17 +117,20 @@ class SerialManager:
                 if line:
                     if self.on_receive:
                         self.on_receive(line)
+                        logger.debug(f"RX: {line}")
                     else:
-                        print(f"[RX] {line}")
+                        logger.debug(f"RX: {line}")
             except Exception as e:
-                print(f"[RX-ERROR] {e}")
+                logger.error(f"RX error: {e}")
             time.sleep(0.05)
-        print("[THREAD] RX stopped")
+        logger.debug("RX thread stopped")
 
+    
     def start(self):
         self.running.set()
         self.tx_thread.start()
         self.rx_thread.start()
+        logger.info("SerialManager started")
 
     def stop(self):
         self.running.clear()
@@ -118,8 +139,9 @@ class SerialManager:
             self.ser.close()
         except Exception:
             pass
-        print("[INFO] SerialManager stopped")
+        logger.info("SerialManager stopped")
 
+    
     def send(self, msg):
         with self.lock:
             self.send_queue.append(msg)
