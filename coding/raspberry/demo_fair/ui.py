@@ -41,7 +41,8 @@ class Knob:
         pygame.draw.line(surface, color_current, (self.cx, self.cy), (px_cur, py_cur), 3)
 
         # Draw desired value
-        val_text = self.font.render(f"{int(self.new_des_val)}", True, color_text)
+        cur_des_txt = f"{int(self.new_cur_val)} ---> [{int(self.new_des_val)}]"
+        val_text = self.font.render(cur_des_txt, True, color_text)
         text_rect = val_text.get_rect(center=(self.cx, self.cy + self.radius * 1.2))
         surface.blit(val_text, text_rect)
 
@@ -100,7 +101,8 @@ class Slider:
         pygame.draw.circle(surface, color_current, (int(pos_cur), self.y), 7, 3)
 
         # Draw desired value
-        val_text = self.font.render(f"{int(self.new_des_val)}", True, color_text)
+        cur_des_txt = f"{int(self.new_cur_val)} ---> [{int(self.new_des_val)}]"
+        val_text = self.font.render(cur_des_txt, True, color_text)
         text_rect = val_text.get_rect(center=(self.x + self.width / 2, self.y + self.width / 6))
         surface.blit(val_text, text_rect)
 
@@ -150,7 +152,7 @@ class Panel:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Control Panel")
         self.ratio_w_knob = 0.25
-        self.ratio_h_knob = 0.45
+        self.ratio_h_knob = 0.42
         self.ratio_r_knob = 0.12
         self.ratio_h_slider = 0.80
         self.ratio_w_legends = 0.50
