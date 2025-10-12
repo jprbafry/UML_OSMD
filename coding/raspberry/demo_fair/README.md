@@ -1,5 +1,3 @@
----
-
 ## Scripts Overview
 
 **ui.py**  
@@ -32,7 +30,6 @@
 - Uses `ui.py` for rendering and interacting with the control panel.  
 - Communicates with `motor_mockup.py` via `mux_tx_rx`.
 
----
 
 ## How to Run
 
