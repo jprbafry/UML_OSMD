@@ -9,8 +9,8 @@ def parse_args():
     parser.add_argument("--width", type=int, default=800, help="Panel width in pixels")
     parser.add_argument("--height", type=int, default=400, help="Panel height in pixels")
     parser.add_argument("--simulate", "-s", action="store_true", help="Run in simulation (file-based) mode instead of real serial")
-    parser.add_argument("--port", "-p",default="COM5", help="Serial port to use when not simulating (e.g. COM5)")
-    parser.add_argument("--baud", "-b",type=int, default=115200, help="Baud rate for the serial connection")
+    parser.add_argument("--port", "-p",default="/dev/ttyACM0", help="Serial port to use when not simulating (e.g. /dev/ttyACM0)")
+    parser.add_argument("--baud", "-b",type=int, default=38400, help="Baud rate for the serial connection")
     parser.add_argument("--debug", "-d", action="store_true", help="Debug mode?")
     return parser.parse_args()
 

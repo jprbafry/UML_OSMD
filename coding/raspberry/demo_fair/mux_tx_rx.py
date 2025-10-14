@@ -59,7 +59,7 @@ class FileBackedFakeSerial:
 # Class to handle Tx/Rx data over real or simulated serial
 class SerialManager:
 
-    def __init__(self, port="COM5", baud=9600, simulate=True, name=None, debug=False):
+    def __init__(self, port="/dev/ttyACM0", baud=38400, simulate=True, name=None, debug=False):
         self.running = threading.Event()
         self.send_queue = []
         self.lock = threading.Lock()
