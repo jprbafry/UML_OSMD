@@ -103,7 +103,6 @@ class SerialManager:
             with self.lock:
                 if self.send_queue:
                     msg = self.send_queue.pop(0)
-                    print(f"TX: {msg}")
                     try:
                         self.ser.write((msg + "\n").encode('ascii'))
                         logger.debug(f"TX: {msg}")
