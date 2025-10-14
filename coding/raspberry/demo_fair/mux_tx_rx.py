@@ -79,13 +79,15 @@ class SerialManager:
         else:
             try:
                 logger.info(f"Opening real serial port {port} @ {baud}")
+
                 self.ser = serial.Serial(
                     port=port,
                     baudrate=baud,
-                    timeout=0.1,  # don't block forever
-                    write_timeout=0.1
+                    timeout=1
                 )
                 logger.info("Serial port opened successfully.")
+                time.sleep(2)  # wait for Arduino reset
+
             except Exception as e:
                 logger.error(f"Could not open {port}: {e}")
                 logger.warning("Falling back to simulation mode.")
@@ -101,6 +103,7 @@ class SerialManager:
             with self.lock:
                 if self.send_queue:
                     msg = self.send_queue.pop(0)
+                    print(f"TX: {msg}")
                     try:
                         self.ser.write((msg + "\n").encode('ascii'))
                         logger.debug(f"TX: {msg}")
@@ -122,7 +125,7 @@ class SerialManager:
                         logger.debug(f"RX: {line}")
             except Exception as e:
                 logger.error(f"RX error: {e}")
-            time.sleep(0.05)
+            time.sleep(0.005)
         logger.debug("RX thread stopped")
 
     
