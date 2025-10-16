@@ -59,7 +59,7 @@ class FileBackedFakeSerial:
 # Class to handle Tx/Rx data over real or simulated serial
 class SerialManager:
 
-    def __init__(self, port="COM5", baud=9600, simulate=True, name=None, debug=False):
+    def __init__(self, port="/dev/ttyACM0", baud=38400, simulate=True, name=None, debug=False):
         self.running = threading.Event()
         self.send_queue = []
         self.lock = threading.Lock()
@@ -79,13 +79,15 @@ class SerialManager:
         else:
             try:
                 logger.info(f"Opening real serial port {port} @ {baud}")
+
                 self.ser = serial.Serial(
                     port=port,
                     baudrate=baud,
-                    timeout=0.1,  # don't block forever
-                    write_timeout=0.1
+                    timeout=1
                 )
                 logger.info("Serial port opened successfully.")
+                time.sleep(2)  # wait for Arduino reset
+
             except Exception as e:
                 logger.error(f"Could not open {port}: {e}")
                 logger.warning("Falling back to simulation mode.")
@@ -122,7 +124,7 @@ class SerialManager:
                         logger.debug(f"RX: {line}")
             except Exception as e:
                 logger.error(f"RX error: {e}")
-            time.sleep(0.05)
+            time.sleep(0.005)
         logger.debug("RX thread stopped")
 
     

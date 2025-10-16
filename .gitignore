@@ -1,2 +1,4 @@
 __pycache__
 *.pyc
+a_to_b.txt
+b_to_a.txt
