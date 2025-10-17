@@ -33,13 +33,13 @@ if __name__ == "__main__":
                 return
 
             # Update current values of knobs and sliders
-            ctrl_panel.knobs[0].update_current_value(vals[0])
-            ctrl_panel.sliders[0].update_current_value(vals[1])
+            ctrl_panel.knobs[0].update_current_value(vals[3])
+            ctrl_panel.sliders[0].update_current_value(vals[0])
             ctrl_panel.knobs[1].update_current_value(vals[2])
-            ctrl_panel.sliders[1].update_current_value(vals[3])
+            ctrl_panel.sliders[1].update_current_value(vals[1])
 
         except Exception as e:
-            print(f"[A RECEIVE ERROR] {e}")
+            print(f"{msg}")
 
     sm.on_receive = on_receive
     sm.start()
@@ -51,10 +51,10 @@ if __name__ == "__main__":
         while ctrl_panel.running:
             try:
                 # Read current desired values from the panel
-                val1 = ctrl_panel.knobs[0].new_des_val
-                val2 = ctrl_panel.sliders[0].new_des_val
-                val3 = ctrl_panel.knobs[1].new_des_val
-                val4 = ctrl_panel.sliders[1].new_des_val
+                val4 = ctrl_panel.knobs[0].new_des_val      # Motor 4 (PCB layout): Light Source Azimuthal
+                val1 = ctrl_panel.sliders[0].new_des_val    # Motor 1 (PCB layout): Light Source Polar
+                val3 = ctrl_panel.knobs[1].new_des_val      # Motor 3 (PCB layout): Detector Azimuthal
+                val2 = ctrl_panel.sliders[1].new_des_val    # Motor 2 (PCB layout): Detector Polar
 
                 # Format message
                 msg = f"{val1:.1f},{val2:.1f},{val3:.1f},{val4:.1f}"

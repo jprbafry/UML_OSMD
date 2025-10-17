@@ -22,10 +22,10 @@ class Knob:
         self.min_val = min_val
         self.max_val = max_val
         self.angle = math.radians(min_val)
-        self.old_des_val = min_val
-        self.new_des_val = min_val
-        self.old_cur_val = min_val
-        self.new_cur_val = min_val
+        self.old_des_val = max_val/2
+        self.new_des_val = max_val/2
+        self.old_cur_val = max_val/2
+        self.new_cur_val = max_val/2
         self.dragging = False
         self.font = font
 
@@ -84,10 +84,10 @@ class Slider:
         self.width = width
         self.min_val = min_val
         self.max_val = max_val
-        self.old_des_val = min_val
-        self.new_des_val = min_val
-        self.old_cur_val = min_val
-        self.new_cur_val = min_val
+        self.old_des_val = max_val/2
+        self.new_des_val = max_val/2
+        self.old_cur_val = max_val/2
+        self.new_cur_val = max_val/2
         self.dragging = False
         self.font = font
 
