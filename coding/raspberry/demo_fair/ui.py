@@ -2,6 +2,7 @@
 import pygame
 import time
 import math
+import threading
 from itertools import chain
 
 
@@ -10,6 +11,8 @@ color_current = (0,255,0) # green
 color_text = (255,255,255) # white
 color_background = (10,10,10) # dark grey
 color_line = (150,150,150) # grey
+color_button_busy = (255,255,0) # yellow
+color_button_idle = (255,255,255) # white
 
 # KNOB
 class Knob:
@@ -142,7 +145,42 @@ class Label:
             text_rect = text_surface.get_rect(topleft=(self.x, self.y))
         surface.blit(text_surface, text_rect)
 
-# ----- Panel -----
+# BUTTON
+class Button:
+    def __init__(self, x, y, size, font, action, color_idle=color_button_idle, color_active=color_button_busy):
+        self.x = x
+        self.y = y
+        self.size = size
+        self.font = font
+        self.text = "PRESS"
+        self.action = action
+        self.color_idle = color_idle
+        self.color_active = color_active
+        self.active = False
+        self.rect = pygame.Rect(x - size//2, y - size//2, size, size)
+
+    def draw(self, surface):
+        color = self.color_active if self.active else self.color_idle
+        pygame.draw.rect(surface, color, self.rect)
+        # Draw text
+        text_surf = self.font.render(self.text, True, (0,0,0))
+        text_rect = text_surf.get_rect(center=(self.x, self.y))
+        surface.blit(text_surf, text_rect)
+
+    def check_click(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mx, my = pygame.mouse.get_pos()
+            if self.rect.collidepoint(mx, my):
+                self.active = True
+
+                # Run the action in a separate thread so it doesn't block Pygame
+                def run_action():
+                    self.action()
+                    self.active = False
+
+                threading.Thread(target=run_action, daemon=True).start()
+
+# PANEL
 class Panel:
     """A Panel containing multiple knobs and sliders grouped logically"""
     def __init__(self, width=800, height=400, fps=60):
@@ -162,6 +200,42 @@ class Panel:
         self.fps = fps
         self.running = True
         self.knobs, self.sliders, self.legends, self.titles = self.create_controls()
+        self.buttons = []
+        # Example: button at center-bottom
+        btn_x = self.width // 2
+        btn_y = int(self.height * 0.15)
+        btn_size = 80
+        self.buttons.append(Button(btn_x, btn_y, btn_size, self.font, self.pulse_knobs_sliders))
+
+
+    
+    def pulse_knobs_sliders(self, N=30, delay=200):
+        """
+        Smoothly move each desired value from its current value up to current+N,
+        then back down to the original value, step by step.
+        delay in milliseconds between steps.
+        """
+        # Store original desired values
+        original_knob_vals = [k.new_des_val for k in self.knobs]
+        original_slider_vals = [s.new_des_val for s in self.sliders]
+
+        # Step up
+        for step in range(1, N + 1):
+            for i, k in enumerate(self.knobs):
+                k.new_des_val = original_knob_vals[i] + step
+            for i, s in enumerate(self.sliders):
+                s.new_des_val = original_slider_vals[i] + step
+            self.draw()
+            pygame.time.wait(delay)
+
+        # Step down
+        for step in range(N, -1, -1):
+            for i, k in enumerate(self.knobs):
+                k.new_des_val = original_knob_vals[i] + step
+            for i, s in enumerate(self.sliders):
+                s.new_des_val = original_slider_vals[i] + step
+            self.draw()
+            pygame.time.wait(delay)
 
     def create_controls(self):
         knobs = []
@@ -205,7 +279,7 @@ class Panel:
     def draw(self):
         self.screen.fill(color_background)
 
-        for element in chain(self.knobs, self.sliders, self.titles, self.legends):
+        for element in chain(self.knobs, self.sliders, self.titles, self.legends, self.buttons):
             element.draw(self.screen)
 
         pygame.display.flip()
@@ -218,6 +292,8 @@ class Panel:
                 knob.update_desired_value(event)
             for slider in self.sliders:
                 slider.update_desired_value(event)
+            for button in self.buttons:
+                button.check_click(event)
 
     def run(self):
         while self.running:
