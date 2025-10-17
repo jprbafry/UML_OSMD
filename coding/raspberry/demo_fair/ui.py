@@ -209,7 +209,7 @@ class Panel:
 
 
     
-    def pulse_knobs_sliders(self, N=30, delay=200):
+    def pulse_knobs_sliders(self, N=20, delay=200):
         """
         Smoothly move each desired value from its current value up to current+N,
         then back down to the original value, step by step.
